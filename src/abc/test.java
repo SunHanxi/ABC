@@ -19,16 +19,23 @@ public class test {
         //算法多次运行的均值
         double mean = 0;
         //srand(time(NULL));
-        for (run = 0; run < bee.runtime; run++) {
+
+        for (run = 0; run < 5; run++) {
+            long start_time = System.currentTimeMillis();
             serBee.initial();
             serBee.MemorizeBestSource();
             for (iter = 0; iter < 10000; iter++) {
                 serBee.SendEmployedBees();
                 serBee.CalculateProbabilities();
+                serBee.re_init();
                 serBee.SendOnlookerBees();
+                serBee.re_init();
+
                 serBee.MemorizeBestSource();
                 serBee.SendScoutBees();
-                if (iter < 500) {
+                serBee.re_init();
+
+                /*if (iter % 500 == 0) {
                     System.out.println("\n第" + iter + "轮");
                     System.out.println("最小花费为：" + serBee.GlobalMin);
                     System.out.println("最佳解为：");
@@ -47,12 +54,14 @@ public class test {
                         System.out.print(serBee.f[i] + "\t");
                     }
                     System.out.println();
-                }
+                }*/
             }
-            for (j = 0; j < serBee.D; j++) {
+            long end_time = System.currentTimeMillis();
+
+            /*for (j = 0; j < serBee.D; j++) {
                 //System.out.println("GlobalParam[%d]: %f\n",j+1,GlobalParams[j]);
                 System.out.println("GlobalParam[" + (j + 1) + "]:" + serBee.GlobalParams[j]);
-            }
+            }*/
 
             for (int i = 0; i < serBee.D; i++) {
                 j = i + 1;
@@ -64,20 +73,13 @@ public class test {
             }
             System.out.println();
             //System.out.println("%d. run: %e \n",run+1,GlobalMin);
-            System.out.println((run + 1) + ".run:" + serBee.GlobalMin);
-            serBee.GlobalMins[run] = serBee.GlobalMin;
+            System.out.println((run + 1) + ".run: Best: " + serBee.GlobalMin);
+            System.out.println("用时："+(double)(end_time-start_time)/1000+"秒");
+            System.out.println();
+            //serBee.GlobalMins[run] = serBee.GlobalMin;
             //mean = mean + serBee.GlobalMin;
         }
-        for (int iiii = 0; iiii < serBee.Foods.length; iiii++) {
-            for (int jjjj = 0; jjjj < serBee.Foods[iiii].length; jjjj++) {
-                System.out.print(serBee.Foods[iiii][jjjj].group[1] + "\t");
-            }
-            System.out.println();
 
-        }
-        for (int i = 0; i < serBee.FoodNumber; i++) {
-            System.out.println(serBee.f[i]+"  " +serBee.fitness[i]);
-        }
         System.out.println();
 
     }

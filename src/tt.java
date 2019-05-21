@@ -19,6 +19,23 @@ public class tt {
 
         System.out.println(Arrays.asList(a).contains(2));
         System.out.println(Arrays.toString(a));
+        double aaa = 1.0;
+        int bbb = 1;
+        System.out.println(aaa==bbb);
 
+        aaa();
+
+    }
+
+    static void aaa()
+    {
+        for (int i = 0; i < 100; i++) {
+            System.out.println(i);
+            for (int j = 0; j < 2; j++) {
+                System.out.println(j);
+                if (i == 2)
+                    return;
+            }
+        }
     }
 }

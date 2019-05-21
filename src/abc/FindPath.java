@@ -42,6 +42,7 @@ public class FindPath {
         //输出节点组别字典
         System.out.println("节点所属组别字典为：");
         System.out.println(group_map.entrySet());
+        System.out.println(group_map.get(13));
 
     }
 
@@ -146,9 +147,21 @@ public class FindPath {
             System.out.println(oo.toString());
         }*/
 
+        //故障节点和路径矩阵依次-1
+        for (int i = 0; i < path_matrix.length; i++) {
+            for (int j = 0; j < path_matrix[i].length; j++) {
+                path_matrix[i][j]-=1;
+            }
+        }
+        for (int i = 0; i < fault_node.length; i++) {
+            for (int j = 0; j < fault_node[i].length; j++) {
+                fault_node[i][j]-=1;
+            }
+        }
+
         for (int i = 0; i < group_list.size(); i++) {
             for (int j = 0; j < group_list.get(i).size(); j++) {
-                group_map.put(group_list.get(i).get(j),i);
+                group_map.put(group_list.get(i).get(j)-1,i);
             }
         }
 

@@ -12,8 +12,8 @@ public class ServiceBeeColony {
 
     /* ABC的控制参数*/
 
-    //约束条件,因为时间是5-20随机生成，取中位数12,共4个，所以为40
-    double time_want_spent = 50;
+    //约束条件,因为时间是5-20随机生成，取中位数12.5,共4个，所以为50
+    double time_want_spent = 45;
 
     //全局重复检测器
     int repeat_count = 0;
@@ -26,6 +26,9 @@ public class ServiceBeeColony {
 
     // 服务商的类别的数量
     int n = 4;
+    // 随机数的上下界，此处为每个服务的数量，暂定为每个服务数量都为20
+    double lb = 0;
+    double ub = 19;
     // 所有节点的数量
     int total = n * (n + 3) / 2;
 
@@ -38,11 +41,7 @@ public class ServiceBeeColony {
     int maxCycle = 2500; /*实验的轮数*/
 
     /* 问题特定变量*/
-    /*
-     * 初始化所有服务商，假设有4类服务，每类服务有10个备选项。
-     * filepath = "./src/abc/service.txt"
-     */
-    Service[][] services = new Service[4][20];
+
 
     //新建group_map，使用字典来保存每个蜜源对应位置的服务所属的类别
     HashMap<Integer, Integer> group_map = new HashMap<>();
@@ -55,9 +54,12 @@ public class ServiceBeeColony {
     //定义存放故障节点的矩阵
     int[][] fault_node = new int[n + 1][2];
 
-    // 随机数的上下界，此处为每个服务的数量，暂定为每个服务数量都为20
-    double lb = 0;
-    double ub = 19;
+
+    /*
+     * 初始化所有服务商，假设有4类服务，每类服务有20个备选项。
+     * filepath = "./src/abc/service.txt"
+     */
+    Service[][] services = new Service[n][(int) (ub - lb + 1)];
 
     int runtime = 1;  /*算法在test里面重复运行的次数，重复多次可以查看算法的稳健性*/
 
@@ -160,7 +162,10 @@ public class ServiceBeeColony {
          *
          * */
         int pos;
-
+        repeat_count ++;
+        if (repeat_count%10000 == 0) {
+            //System.out.println("初始化第"+repeat_count/10000+"万次");
+        }
         //开始初始化total个节点
         for (pos = 0; pos < total; pos++) {
 
@@ -173,19 +178,17 @@ public class ServiceBeeColony {
             int random_pos = b.intValue();
             //random_pos是实际需要选取的服务序号，根据pos来索引map中的服务类别，然后进行选取
             //临时变量tmp_group用来存储当前节点归属的组别0-3
-            int tmp_group = group_map.get(pos + 1);
+            int tmp_group = group_map.get(pos);
             //得到组别后，去对应的组随机选取元素，而且注意如果此节点是fault节点，则不能不能重复
             //检查是否重复可以根据每个节点的group[][1]的值，这是每一组的每个服务的唯一编号
-            if (pos + 1 == fault_node[tmp_group + 1][1]) {
-                //System.out.println(services[tmp_group][random_pos]+"~~"+Foods[index][fault_node[tmp_group+1][0]]);
-                while (services[tmp_group][random_pos].group[1] == Foods[index][fault_node[tmp_group + 1][0] - 1].group[1]) {
+            if (pos == fault_node[tmp_group + 1][1]) {
+                while (services[tmp_group][random_pos].group[1] == Foods[index][fault_node[tmp_group + 1][0]].group[1]) {
                     //如果真的相同，则重新随机。
                     r = (Math.random() * 32767 / ((double) 32767 + (double) (1)));
                     r = r * (ub - lb) + lb;
                     b = new BigDecimal(r);
                     b = b.setScale(0, RoundingMode.HALF_UP);
                     random_pos = b.intValue();
-                    tmp_group = group_map.get(pos);
                 }
             }
 
@@ -205,118 +208,34 @@ public class ServiceBeeColony {
 
     /*所有蜜源都已初始化 */
     void initial() {
-        String filepath = "./src/abc/service.txt";
-        List<String> serviceList;
-        serviceList = readFile(filepath);
-        int group = 0;
-        for (int i = 1; i <= 80; i++) {
-            String[] tmpList = serviceList.get(i - 1).split("  ");
-            if (i <= 20 && i >= 1)
-                group = 1;
-            if (i <= 40 && i >= 21)
-                group = 2;
-            if (i <= 60 && i >= 41)
-                group = 3;
-            if (i <= 80 && i >= 61)
-                group = 4;
-            int[] gg = new int[2];
-            gg[0] = group - 1;
-            gg[1] = i - (group - 1) * 20 - 1;
-            services[group - 1][gg[1]] = new Service(gg, Double.parseDouble(tmpList[0]),
-                    Double.parseDouble(tmpList[1]));
-        }//完成初始化服务商
-
 
         //初始化路径矩阵和故障节点
-        FindPath fd = new FindPath();
-        fd.findpath(path_matrix, fault_node, n, group_map);
-        System.out.println("group_map: " + group_map.entrySet());
-        for (int i = 0; i < path_matrix.length; i++) {
-            for (int j = 0; j < path_matrix[0].length; j++) {
-                System.out.print(path_matrix[i][j] + " ");
-            }
-            System.out.println();
-        }
+        init_services_and_path();
+
         int i;
 
         // 初始化FoodNumber个蜜源
         for (i = 0; i < FoodNumber; i++) {
             init(i);
-
+            boolean repeat_flag = repeat_node(i);
+            boolean flag = calc_time_spent(i);
             /*
              * 初始化一个蜜源后
              * 计算约束条件，如果不符合约束条件，直接舍弃，重新生成。
              * 约束条件是时间，要求每条路径的时间都得符合要求
              * 路径信息在path_matrix中
              * */
-            //默认符合要求
-            boolean flag = false;
-            double time_spent[] = new double[n + 1];
-            for (int j = 0; j < n + 1; j++) {
-                //第一行
-                if (j == 0) {
-                    for (int k = 0; k < n; k++) {
-                        double tmp_time = 0;
-                        int node_number = path_matrix[j][k] - 1;
-                        tmp_time = Foods[i][node_number].time;
-                        time_spent[0] += tmp_time;
-                    }
-                } else {
-                    for (int k = 0; k < n + 1; k++) {
-                        double tmp_time = 0;
-                        int node_number = path_matrix[j][k] - 1;
-                        tmp_time = Foods[i][node_number].time;
-                        time_spent[j] += tmp_time;
-                    }
-                }
+            while (repeat_flag)
+            {
+                init(i);
+                repeat_flag = repeat_node(i);
             }
-
-            for (int m = 0; m < time_spent.length; m++) {
-                if (time_spent[m] > time_want_spent) {
-                    //System.out.println("time = " + time_spent[m]);
-                    flag = true;
-                    break;
-                }
-            }
-
             while (flag) {
                 init(i);
                 //默认符合要求
                 //再次计算，如果不符合要求就接着循环
                 //清除time_spent[n]
-                for (int j = 0; j < n + 1; j++) {
-                    time_spent[j] = 0;
-                }
-                flag = false;
-                for (int j = 0; j < n + 1; j++) {
-                    //第一行
-                    if (j == 0) {
-                        for (int k = 0; k < n; k++) {
-                            double tmp_time = 0;
-                            int node_number = path_matrix[j][k] - 1;
-                            tmp_time = Foods[i][node_number].time;
-                            time_spent[0] += tmp_time;
-                        }
-                    } else {
-                        for (int k = 0; k < n + 1; k++) {
-                            double tmp_time = 0;
-                            int node_number = path_matrix[j][k] - 1;
-                            tmp_time = Foods[i][node_number].time;
-                            time_spent[j] += tmp_time;
-                        }
-                    }
-                }
-
-                for (int m = 0; m < time_spent.length; m++) {
-                    if (time_spent[m] > time_want_spent) {
-                        //System.out.println("long time = " + time_spent[m]);
-                        repeat_count++;
-                        if (repeat_count % 1000 == 0)
-                            System.out.println("探测第" + repeat_count + "次");
-                        flag = true;
-                        break;
-                    }
-                }
+                flag = calc_time_spent(i);
             }
         }
         //现在第i个蜜源是符合要求的
@@ -353,23 +272,21 @@ public class ServiceBeeColony {
             while (flag == 1) {
                 flag = 0;
                 employ_count++;
-                //随机1000次后依然不能跳出循环，则强制打断
-                if (employ_count == 1000) {
-                    //break_flag = true;
-                    //break;
+                if (employ_count == 1000)
+                {
+                    //如果局部最优，直接打断，进入下一步
+                    return;
                 }
                 //随机选取的邻居是第几组的,得到的组号是以0开始的，到3结束
-                node2change_group = group_map.get(param2change + 1);
-                //System.out.println("雇佣蜂：节点是第"+node2change_group+"组的");
-                //提取故障矩阵对应行的数据，比如是第一组的故障[1,5],在蜜源中需要-1
+                node2change_group = group_map.get(param2change);
                 tmp_fault_node = new Integer[2];
                 tmp_fault_node[0] = fault_node[node2change_group + 1][0];
                 tmp_fault_node[1] = fault_node[node2change_group + 1][1];
                 //System.out.println("这一组的故障节点是"+Arrays.toString(tmp_fault_node));
-                //如果当前蜜源的当前点是某个故障节点
 
-                if (Arrays.asList(tmp_fault_node).contains(param2change + 1)) {
-                    if (tmp_fault_node[0] == param2change + 1) {
+                //如果当前蜜源的当前点是某个故障节点
+                if (Arrays.asList(tmp_fault_node).contains(param2change)) {
+                    if (tmp_fault_node[0] == param2change) {
                         another_index = 1;
                         index = 0;
                     } else {
@@ -378,7 +295,7 @@ public class ServiceBeeColony {
                     }
                     //System.out.println("这一组的故障节点是"+Arrays.toString(tmp_fault_node));
                     //System.out.println("这一组的故障节点是"+tmp_fault_node[index]+"\t"+tmp_fault_node[another_index]);
-                    if (Foods[i][tmp_fault_node[another_index] - 1].group[1] == Foods[neighbour][tmp_fault_node[index] - 1].group[1]) {
+                    if (Foods[i][tmp_fault_node[another_index]].group[1] == Foods[neighbour][tmp_fault_node[index]].group[1]) {
                         flag = 1;
                         //System.out.println("冲突了");
                     }
@@ -392,36 +309,30 @@ public class ServiceBeeColony {
             }
             //System.out.println("跳出循环");
 
-            //强制跳出循环后，余下阶段均不执行
-            if (break_flag == true) {
-                //重新随机生成一个新的
-                //System.out.println(i+" init!");
-                //init(i);
-            } else {
+            for (j = 0; j < D; j++)
+                solution[j] = Foods[i][j];
+            //貌似没法进行运算，所以直接替换被随机的一个服务商即可
+            solution[param2change] = Foods[neighbour][param2change];
+            /*v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij}) */
+            //r = (Math.random() * 32767 / ((double) (32767) + (double) (1)));
+            //solution[param2change] = Foods[i][param2change] + (Foods[i][param2change] - Foods[neighbour][param2change]) * (r - 0.5) * 2;
+
+            ObjValSol = calculateFunction(solution);
+            FitnessSol = CalculateFitness(ObjValSol);
+
+            /*在当前解决方案i和其突变体之间应用贪婪选择*/
+            if (FitnessSol > fitness[i]) {
+
+                /*If the mutant solution is better than the current solution i, replace the solution with the mutant and reset the trial counter of solution i*/
+                trial[i] = 0;
                 for (j = 0; j < D; j++)
-                    solution[j] = Foods[i][j];
-                //貌似没法进行运算，所以直接替换被随机的一个服务商即可
-                solution[param2change] = Foods[neighbour][param2change];
-                /*v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij}) */
-                //r = (Math.random() * 32767 / ((double) (32767) + (double) (1)));
-                //solution[param2change] = Foods[i][param2change] + (Foods[i][param2change] - Foods[neighbour][param2change]) * (r - 0.5) * 2;
-
-                ObjValSol = calculateFunction(solution);
-                FitnessSol = CalculateFitness(ObjValSol);
-
-                /*在当前解决方案i和其突变体之间应用贪婪选择*/
-                if (FitnessSol > fitness[i]) {
-
-                    /*If the mutant solution is better than the current solution i, replace the solution with the mutant and reset the trial counter of solution i*/
-                    trial[i] = 0;
-                    for (j = 0; j < D; j++)
-                        Foods[i][j] = solution[j];
-                    f[i] = ObjValSol;
-                    fitness[i] = FitnessSol;
-                } else {   /*如果解决方案无法改进，增加计数器*/
-                    trial[i] = trial[i] + 1;
-                }
+                    Foods[i][j] = solution[j];
+                f[i] = ObjValSol;
+                fitness[i] = FitnessSol;
+            } else {   /*如果解决方案无法改进，增加计数器*/
+                trial[i] = trial[i] + 1;
             }
+
         }
         /*雇佣蜂阶段结束*/
     }
@@ -478,12 +389,13 @@ public class ServiceBeeColony {
                 while (flag == 1) {
                     flag = 0;
                     on_look_count++;
-                    if (on_look_count == 1000) {
-                        //break_flag = true;
-                        //break;
+                    if (on_look_count == 1000)
+                    {
+                        //如果局部最优，直接打断，进入下一步
+                        return;
                     }
                     //随机选取的邻居是第几组的,得到的组号是以0开始的，到3结束
-                    node2change_group = group_map.get(param2change + 1);
+                    node2change_group = group_map.get(param2change);
                     //System.out.println("节点是第"+node2change_group+"组的");
                     //提取故障矩阵对应行的数据，比如是第一组的故障[1,5],在蜜源中需要-1
                     tmp_fault_node = new Integer[2];
@@ -492,8 +404,8 @@ public class ServiceBeeColony {
                     //System.out.println("这一组的故障节点是"+Arrays.toString(tmp_fault_node));
                     //如果当前蜜源的当前点是某个故障节点
 
-                    if (Arrays.asList(tmp_fault_node).contains(param2change + 1)) {
-                        if (tmp_fault_node[0] == param2change + 1) {
+                    if (Arrays.asList(tmp_fault_node).contains(param2change)) {
+                        if (tmp_fault_node[0] == param2change) {
                             another_index = 1;
                             index = 0;
                         } else {
@@ -502,45 +414,45 @@ public class ServiceBeeColony {
                         }
                         //System.out.println("这一组的故障节点是"+Arrays.toString(tmp_fault_node));
                         //System.out.println("这一组的故障节点是"+tmp_fault_node[index]+"\t"+tmp_fault_node[another_index]);
-                        if (Foods[i][tmp_fault_node[another_index] - 1].group[1] == Foods[neighbour][tmp_fault_node[index] - 1].group[1]) {
+                        if (Foods[i][tmp_fault_node[another_index]].group[1] == Foods[neighbour][tmp_fault_node[index]].group[1]) {
                             flag = 1;
                         }
                     }
                     //System.out.println("跟随故障节点冲突");
                     //System.out.println("故障节点：" +  );
-                    if (neighbour == i)
-                        flag = 1;
+                    //if (neighbour == i)
+                    //    flag = 1;
                     r = (Math.random() * 32767 / ((double) (32767) + (double) (1)));
                     neighbour = (int) (r * FoodNumber);
                 }//循环结束
 
-                if (break_flag == true) {
-                    //init(i);
-                    //trial[i] = trial[i] + 1;
-                } else {
+
+                //init(i);
+                //trial[i] = trial[i] + 1;
+
+                for (j = 0; j < D; j++)
+                    solution[j] = Foods[i][j];
+
+                /*v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij}) */
+                //r = (Math.random() * 32767 / ((double) (32767) + (double) (1)));
+                //solution[param2change] = Foods[i][param2change] + (Foods[i][param2change] - Foods[neighbour][param2change]) * (r - 0.5) * 2;
+                solution[param2change] = Foods[neighbour][param2change];
+
+                ObjValSol = calculateFunction(solution);
+                FitnessSol = CalculateFitness(ObjValSol);
+
+                /*在当前解决方案i和其突变体之间应用贪婪选择*/
+                if (FitnessSol > fitness[i]) {
+                    /*如果突变体优于当前个体i，则用突变体替换当前个体并重置个体i的试验计数器*/
+                    trial[i] = 0;
                     for (j = 0; j < D; j++)
-                        solution[j] = Foods[i][j];
-
-                    /*v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij}) */
-                    //r = (Math.random() * 32767 / ((double) (32767) + (double) (1)));
-                    //solution[param2change] = Foods[i][param2change] + (Foods[i][param2change] - Foods[neighbour][param2change]) * (r - 0.5) * 2;
-                    solution[param2change] = Foods[neighbour][param2change];
-
-                    ObjValSol = calculateFunction(solution);
-                    FitnessSol = CalculateFitness(ObjValSol);
-
-                    /*在当前解决方案i和其突变体之间应用贪婪选择*/
-                    if (FitnessSol > fitness[i]) {
-                        /*如果突变体优于当前个体i，则用突变体替换当前个体并重置个体i的试验计数器*/
-                        trial[i] = 0;
-                        for (j = 0; j < D; j++)
-                            Foods[i][j] = solution[j];
-                        f[i] = ObjValSol;
-                        fitness[i] = FitnessSol;
-                    } else {   /*如果个体i未被增强，则试验计数器+1*/
-                        trial[i] = trial[i] + 1;
-                    }
+                        Foods[i][j] = solution[j];
+                    f[i] = ObjValSol;
+                    fitness[i] = FitnessSol;
+                } else {   /*如果个体i未被增强，则试验计数器+1*/
+                    trial[i] = trial[i] + 1;
                 }
+
             } /*if */
             i++;
             if (i == FoodNumber)
@@ -615,7 +527,7 @@ public class ServiceBeeColony {
     double MyFun(Service[] sol) {
         double total_price = 0;
         double total_time = 0;
-        for (int i = 0; i < sol.length; i++) {
+        for (int i = 0; i < total; i++) {
             total_price += sol[i].price;
             //total_time += sol[i].time;
         }
@@ -653,4 +565,99 @@ public class ServiceBeeColony {
         }
         return list;
     }
+
+    //计算随机生成的蜜源是否符合条件
+    boolean calc_time_spent(int i)
+    {
+        boolean flag = false;
+        double time_spent[] = new double[n + 1];
+        for (int j = 0; j < n + 1; j++) {
+            //第一行
+            if (j == 0) {
+                for (int k = 0; k < n; k++) {
+                    double tmp_time = 0;
+                    int node_number = path_matrix[j][k];
+                    tmp_time = Foods[i][node_number].time;
+                    time_spent[0] += tmp_time;
+                }
+            } else {
+                for (int k = 0; k < n + 1; k++) {
+                    double tmp_time = 0;
+                    int node_number = path_matrix[j][k];
+                    tmp_time = Foods[i][node_number].time;
+                    time_spent[j] += tmp_time;
+                }
+            }
+        }
+
+        for (int m = 0; m < time_spent.length; m++) {
+            if (time_spent[m] > time_want_spent) {
+                //System.out.println("time = " + time_spent[m]);
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    //增加一个功能，如果节点重复了，就重新生成
+    void re_init()
+    {
+        for (int i = 0; i < FoodNumber; i++) {
+            if (repeat_node(i))
+            {
+                init(i);
+                //System.out.println(i+" 被重新生成了");
+            }
+        }
+    }
+
+    boolean repeat_node(int i)
+    {
+        boolean flag = false;
+        for (int j = 1; j < fault_node.length; j++) {
+            if (Foods[i][fault_node[j][0]].group[1] == Foods[i][fault_node[j][1]].group[1]){
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    void init_services_and_path()
+    {
+        String filepath = "./src/abc/service.txt";
+        List<String> serviceList;
+        serviceList = readFile(filepath);
+        int group = 0;
+        for (int i = 1; i <= n*(ub-lb+1); i++) {
+            String[] tmpList = serviceList.get(i - 1).split("  ");
+            if (i <= (ub-lb+1) && i >= 1)
+                group = 1;
+            if (i <= 2*(ub-lb+1) && i >= (ub-lb+1)+1)
+                group = 2;
+            if (i <= 3*(ub-lb+1) && i >= 2*(ub-lb+1)+1)
+                group = 3;
+            if (i <= 4*(ub-lb+1) && i >= 3*(ub-lb+1)+1)
+                group = 4;
+            int[] gg = new int[2];
+            gg[0] = group - 1;
+            gg[1] = i - (group - 1) * (int) (ub-lb+1) - 1;
+            services[group - 1][gg[1]] = new Service(gg, Double.parseDouble(tmpList[0]),
+                    Double.parseDouble(tmpList[1]));
+        }//完成初始化服务商
+
+
+        //初始化路径矩阵和故障节点
+        FindPath fd = new FindPath();
+        fd.findpath(path_matrix, fault_node, n, group_map);
+        //System.out.println("group_map: " + group_map.entrySet());
+        /*for (int i = 0; i < path_matrix.length; i++) {
+            for (int j = 0; j < path_matrix[0].length; j++) {
+                System.out.print(path_matrix[i][j] + " ");
+            }
+            System.out.println();
+        }*/
+    }
+
 }
