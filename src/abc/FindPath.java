@@ -12,7 +12,7 @@ public class FindPath {
     public static void main(String[] args) {
 
         // 服务商的类别的数量
-        int n = 4;
+        int n = 5;
 
         //新建group_map，用于存放每个节点所属的组别
         HashMap<Integer,Integer> group_map = new HashMap<>();
@@ -42,7 +42,6 @@ public class FindPath {
         //输出节点组别字典
         System.out.println("节点所属组别字典为：");
         System.out.println(group_map.entrySet());
-        System.out.println(group_map.get(13));
 
     }
 

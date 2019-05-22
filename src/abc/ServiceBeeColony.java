@@ -35,53 +35,44 @@ public class ServiceBeeColony {
     int n = 4;  // 服务商的类别的数量
     double lb = 0;  // 随机数的上下界，此处为每个服务的数量，暂定为每个服务数量都为20
     double ub = 19;
+    String dataset_path; //数据集路径
+
+    public ServiceBeeColony(double time_want_spent, int n, double lb, double ub, String dataset_path) {
+        this.time_want_spent = time_want_spent;
+        this.n = n;
+        this.lb = lb;
+        this.ub = ub;
+        this.total = n * (n + 3) / 2;
+        this.D = this.total;
+        this.path_matrix = new int[n + 1][n + 1];
+        this.fault_node = new int[n + 1][2];
+        this.services = new Service[n][(int) (ub - lb + 1)];
+        this.Foods = new Service[FoodNumber][D];
+        this.f = new double[FoodNumber];
+        this.fitness = new double[FoodNumber];
+        this.trial = new double[FoodNumber];
+        this.prob = new double[FoodNumber];
+        this.solution = new Service[D];
+        this.GlobalParams = new Service[D];
+        this.dataset_path = dataset_path;
+    }
 
     //依赖于初始化的参数
-    int total = n * (n + 3) / 2;// 所有节点的数量
-
-    int D = total; /*要优化的问题的参数数量*/
-
-    // 定义路径矩阵
-    int[][] path_matrix = new int[n + 1][n + 1];
-
-    //定义存放故障节点的矩阵
-    int[][] fault_node = new int[n + 1][2];
-
-    Service[][] services = new Service[n][(int) (ub - lb + 1)];
-
+    int total;// 所有节点的数量
+    int D; /*要优化的问题的参数数量*/
+    int[][] path_matrix; // 定义路径矩阵
+    int[][] fault_node; //定义存放故障节点的矩阵
+    Service[][] services; // 所有服务商
     /*Foods是蜜源。 Foods矩阵的每一行都是一个包含要优化的D参数的向量。
     Foods矩阵的行数等于FoodNumber*/
-    //直接让Foods存储service对象
-    Service[][] Foods = new Service[FoodNumber][D];
+    Service[][] Foods; //直接让Foods存储service对象
+    double[] f; //f是目标函数值
+    double[] fitness; //"fitness适应度
+    double[] trial;  //trail是每个蜜源的试验次数
+    double[] prob; //prob是一个保持蜜源(解决方案)概率的载体,也即轮盘赌的概率
+    Service[] solution;
+    Service[] GlobalParams; //最优解的参数,直接存储service对象
 
-    //f是目标函数值
-    double[] f = new double[FoodNumber];
-
-    //"fitness适应度
-    double[] fitness = new double[FoodNumber];
-
-    //trail是每个蜜源的试验次数
-    double[] trial = new double[FoodNumber];
-
-    //prob是一个保持蜜源(解决方案)概率的载体,也即轮盘赌的概率
-    double[] prob = new double[FoodNumber];
-
-    Service[] solution = new Service[D];
-    Service[] GlobalParams = new Service[D]; //最优解的参数,直接存储service对象
-
-
-
-    /*计算适应度*/
-    double CalculateFitness(double fun) {
-        double result = 0;
-        if (fun >= 0) {
-            result = 1 / (fun + 1);
-        } else {
-
-            result = 1 + Math.abs(fun);
-        }
-        return result;
-    }
 
     /*存储最佳蜜源*/
     void MemorizeBestSource() {
@@ -114,8 +105,8 @@ public class ServiceBeeColony {
          *
          * */
         int pos;
-        repeat_count ++;
-        if (repeat_count%10000 == 0) {
+        repeat_count++;
+        if (repeat_count % 10000 == 0) {
             //System.out.println("初始化第"+repeat_count/10000+"万次");
         }
         //开始初始化total个节点
@@ -177,8 +168,7 @@ public class ServiceBeeColony {
              * 约束条件是时间，要求每条路径的时间都得符合要求
              * 路径信息在path_matrix中
              * */
-            while (repeat_flag)
-            {
+            while (repeat_flag) {
                 init(i);
                 repeat_flag = repeat_node(i);
             }
@@ -224,8 +214,7 @@ public class ServiceBeeColony {
             while (flag == 1) {
                 flag = 0;
                 employ_count++;
-                if (employ_count == 1000)
-                {
+                if (employ_count == 1000) {
                     //如果局部最优，直接打断，进入下一步
                     return;
                 }
@@ -289,8 +278,20 @@ public class ServiceBeeColony {
         /*雇佣蜂阶段结束*/
     }
 
+    /*计算适应度*/
+    double CalculateFitness(double fun) {
+        double result = 0;
+        if (fun >= 0) {
+            result = 1 / (fun + 1);
+        } else {
+
+            result = 1 + Math.abs(fun);
+        }
+        return result;
+    }
+
     /* 选择食物来源的概率与其质量成比例*/
-    /*可以使用不同的方案来计算概率值*/
+    /*可以使用不同的方案来计算概率值，最经典的就是轮盘赌↓↓↓*/
     /* prob(i)=fitness(i)/sum(fitness)*/
     void CalculateProbabilities() {
         int i;
@@ -341,8 +342,7 @@ public class ServiceBeeColony {
                 while (flag == 1) {
                     flag = 0;
                     on_look_count++;
-                    if (on_look_count == 1000)
-                    {
+                    if (on_look_count == 1000) {
                         //如果局部最优，直接打断，进入下一步
                         return;
                     }
@@ -431,65 +431,20 @@ public class ServiceBeeColony {
         return MyFun(sol);
     }
 
-    double sphere(double[] sol) {
-        int j;
-        double top = 0;
-        for (j = 0; j < D; j++) {
-            top = top + sol[j] * sol[j];
-        }
-        return top;
-    }
-
-    double Rosenbrock(double[] sol) {
-        int j;
-        double top = 0;
-        for (j = 0; j < D - 1; j++) {
-            top = top + 100 * Math.pow((sol[j + 1] - Math.pow((sol[j]), (double) 2)), (double) 2) + Math.pow((sol[j] - 1), (double) 2);
-        }
-        return top;
-    }
-
-    double Griewank(double[] sol) {
-        int j;
-        double top1, top2, top;
-        top = 0;
-        top1 = 0;
-        top2 = 1;
-        for (j = 0; j < D; j++) {
-            top1 = top1 + Math.pow((sol[j]), (double) 2);
-            top2 = top2 * Math.cos((((sol[j]) / Math.sqrt((double) (j + 1))) * Math.PI) / 180);
-
-        }
-        top = (1 / (double) 4000) * top1 - top2 + 1;
-        return top;
-    }
-
-    double Rastrigin(double[] sol) {
-        int j;
-        double top = 0;
-
-        for (j = 0; j < D; j++) {
-            top = top + (Math.pow(sol[j], (double) 2) - 10 * Math.cos(2 * Math.PI * sol[j]) + 10);
-        }
-        return top;
-    }
-
     //此处自定义自己的目标函数
     //本实验中计算函数值需要加载路径二维矩阵
     double MyFun(Service[] sol) {
         double total_price = 0;
-        double total_time = 0;
         for (int i = 0; i < total; i++) {
             total_price += sol[i].price;
-            //total_time += sol[i].time;
         }
         return total_price;
     }
 
-    List<String> readFile(String filePath) {
+    List<String> readFile() {
         List<String> list = new ArrayList<String>();
         String encoding = "UTF-8";
-        File file = new File("./src/abc/service.txt");
+        File file = new File(dataset_path);
         InputStreamReader read;
         {
             try {
@@ -503,10 +458,6 @@ public class ServiceBeeColony {
                 }
                 bufferedReader.close();
                 read.close();
-                /*System.out.println(list);
-                for (int i = 0; i < list.size(); i++) {
-                    System.out.println(list.get(i));
-                }*/
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (FileNotFoundException e) {
@@ -519,8 +470,7 @@ public class ServiceBeeColony {
     }
 
     //计算随机生成的蜜源是否符合条件
-    boolean calc_time_spent(int i)
-    {
+    boolean calc_time_spent(int i) {
         boolean flag = false;
         double time_spent[] = new double[n + 1];
         for (int j = 0; j < n + 1; j++) {
@@ -553,22 +503,19 @@ public class ServiceBeeColony {
     }
 
     //增加一个功能，如果节点重复了，就重新生成
-    void re_init()
-    {
+    void re_init() {
         for (int i = 0; i < FoodNumber; i++) {
-            if (repeat_node(i))
-            {
+            if (repeat_node(i)) {
                 init(i);
                 //System.out.println(i+" 被重新生成了");
             }
         }
     }
 
-    boolean repeat_node(int i)
-    {
+    boolean repeat_node(int i) {
         boolean flag = false;
         for (int j = 1; j < fault_node.length; j++) {
-            if (Foods[i][fault_node[j][0]].group[1] == Foods[i][fault_node[j][1]].group[1]){
+            if (Foods[i][fault_node[j][0]].group[1] == Foods[i][fault_node[j][1]].group[1]) {
                 flag = true;
                 break;
             }
@@ -576,40 +523,22 @@ public class ServiceBeeColony {
         return flag;
     }
 
-    void init_services_and_path()
-    {
-        String filepath = "./src/abc/service.txt";
+    void init_services_and_path() {
         List<String> serviceList;
-        serviceList = readFile(filepath);
+        serviceList = readFile();
         int group = 0;
-        for (int i = 1; i <= n*(ub-lb+1); i++) {
-            String[] tmpList = serviceList.get(i - 1).split("  ");
-            if (i <= (ub-lb+1) && i >= 1)
-                group = 1;
-            if (i <= 2*(ub-lb+1) && i >= (ub-lb+1)+1)
-                group = 2;
-            if (i <= 3*(ub-lb+1) && i >= 2*(ub-lb+1)+1)
-                group = 3;
-            if (i <= 4*(ub-lb+1) && i >= 3*(ub-lb+1)+1)
-                group = 4;
+        for (int i = 0; i < n * (ub - lb + 1); i++) {
+            String[] tmpList = serviceList.get(i).split("  ");
+            group = (int) (i / (ub - lb + 1) + 1);
             int[] gg = new int[2];
             gg[0] = group - 1;
-            gg[1] = i - (group - 1) * (int) (ub-lb+1) - 1;
-            services[group - 1][gg[1]] = new Service(gg, Double.parseDouble(tmpList[0]),
-                    Double.parseDouble(tmpList[1]));
+            gg[1] = i - (group - 1) * (int) (ub - lb + 1);
+            services[group - 1][gg[1]] = new Service(gg, Double.parseDouble(tmpList[0]), Double.parseDouble(tmpList[1]));
         }//完成初始化服务商
-
 
         //初始化路径矩阵和故障节点
         FindPath fd = new FindPath();
         fd.findpath(path_matrix, fault_node, n, group_map);
-        //System.out.println("group_map: " + group_map.entrySet());
-        /*for (int i = 0; i < path_matrix.length; i++) {
-            for (int j = 0; j < path_matrix[0].length; j++) {
-                System.out.print(path_matrix[i][j] + " ");
-            }
-            System.out.println();
-        }*/
     }
 
 }
