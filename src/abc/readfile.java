@@ -14,7 +14,7 @@ public class readfile {
         double ub = 9;
         Service[][] services = new Service[n][(int) (ub - lb + 1)];
         String encoding = "UTF-8";
-        File file = new File("./src/abc/4_10.txt");
+        File file = new File("4_10.txt");
         InputStreamReader read;
         {
             try {

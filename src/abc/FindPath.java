@@ -82,12 +82,6 @@ public class FindPath {
             tmp.add(i + 1);
             group_list.add(tmp);
         }
-
-       /* //输出第一条路径
-        for (int i = 0; i < n; i++) {
-
-            System.out.println(group_list.get(i).get(0));
-        }*/
         path_matrix[0][n] = 0;
 
         //循环，找剩下的路径
@@ -139,7 +133,6 @@ public class FindPath {
                 count++;
             }
         }
-
         /*// 测试输出group_list
         for(Object oo:group_list)
         {
@@ -157,15 +150,11 @@ public class FindPath {
                 fault_node[i][j]-=1;
             }
         }
-
         for (int i = 0; i < group_list.size(); i++) {
             for (int j = 0; j < group_list.get(i).size(); j++) {
                 group_map.put(group_list.get(i).get(j)-1,i);
             }
         }
-
-
-
     }
 }
 

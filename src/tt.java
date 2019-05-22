@@ -1,14 +1,5 @@
-import java.awt.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import abc.Service;
-import abc.Service.*;
-
-//测试函数，不看。
 public class tt {
     public static void main(String[] args) {
         double r;
@@ -21,9 +12,9 @@ public class tt {
         System.out.println(Arrays.toString(a));
         double aaa = 1.0;
         int bbb = 1;
-        System.out.println(aaa==bbb);
+        System.out.println(aaa == bbb);
 
-        System.out.println(1/10);
+        System.out.println(1 / 10);
 
     }
 }
