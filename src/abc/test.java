@@ -1,68 +1,42 @@
 package abc;
 
-import java.util.Arrays;
-
 public class test {
-    static beeColony bee = new beeColony();
-    static ServiceBeeColony serBee = new ServiceBeeColony();
+
+    //使用自定义参数
+    //static ServiceBeeColony serBee = new ServiceBeeColony(time_want_spent,n,lb,ub,maxCycle,runtime);
 
     public static void main(String[] args) {
-
-        //迭代次数
-        int iter = 0;
-
-        //算法运行次数
-        int run = 0;
+        // 初始化参数
+        double time_want_spent = 50; //约束条件,因为时间是5-20随机生成，取中位数12.5,共4个，所以为50
+        int n = 4;  // 服务商的类别的数量
+        double lb = 0;  // 随机数的上下界，此处为每个服务的数量，暂定为每个服务数量都为20
+        double ub = 19;
+        int maxCycle = 2500; /*实验的轮数*/
+        int runtime = 1;  /*算法在test里面重复运行的次数，重复多次可以查看算法的稳健性*/
 
         int j = 0;
 
-        //算法多次运行的均值
-        double mean = 0;
-        //srand(time(NULL));
-
-        for (run = 0; run < 5; run++) {
+        for (int run = 0; run < runtime; run++) {
+            // 使用默认参数
+            //ServiceBeeColony serBee = new ServiceBeeColony();
+            ServiceBeeColony serBee = new ServiceBeeColony();
             long start_time = System.currentTimeMillis();
             serBee.initial();
             serBee.MemorizeBestSource();
-            for (iter = 0; iter < 10000; iter++) {
+            for (int iter = 0; iter < serBee.maxCycle; iter++) {
                 serBee.SendEmployedBees();
                 serBee.CalculateProbabilities();
                 serBee.re_init();
                 serBee.SendOnlookerBees();
                 serBee.re_init();
-
                 serBee.MemorizeBestSource();
                 serBee.SendScoutBees();
                 serBee.re_init();
-
-                /*if (iter % 500 == 0) {
-                    System.out.println("\n第" + iter + "轮");
-                    System.out.println("最小花费为：" + serBee.GlobalMin);
-                    System.out.println("最佳解为：");
-                    for (int iiii = 0; iiii < serBee.D; iiii++) {
-                        System.out.print(serBee.GlobalParams[iiii].group[1] + "\t");
-                    }
-                    System.out.println();
-                    System.out.println("所有的解为：");
-                    for (int iiii = 0; iiii < serBee.Foods.length; iiii++) {
-                        for (int jjjj = 0; jjjj < serBee.Foods[iiii].length; jjjj++) {
-                            System.out.print(serBee.Foods[iiii][jjjj].group[1] + "\t");
-                        }
-                        System.out.println();
-                    }
-                    for (int i = 0; i < serBee.FoodNumber; i++) {
-                        System.out.print(serBee.f[i] + "\t");
-                    }
-                    System.out.println();
-                }*/
             }
+
             long end_time = System.currentTimeMillis();
 
-            /*for (j = 0; j < serBee.D; j++) {
-                //System.out.println("GlobalParam[%d]: %f\n",j+1,GlobalParams[j]);
-                System.out.println("GlobalParam[" + (j + 1) + "]:" + serBee.GlobalParams[j]);
-            }*/
-
+            //输出最佳解
             for (int i = 0; i < serBee.D; i++) {
                 j = i + 1;
                 System.out.print(j + "\t");
@@ -72,12 +46,10 @@ public class test {
                 System.out.print(serBee.GlobalParams[i].group[1] + "\t");
             }
             System.out.println();
-            //System.out.println("%d. run: %e \n",run+1,GlobalMin);
-            System.out.println((run + 1) + ".run: Best: " + serBee.GlobalMin);
-            System.out.println("用时："+(double)(end_time-start_time)/1000+"秒");
+            System.out.println((run + 1) + " run: Best: " + serBee.GlobalMin);
+            System.out.println("用时：" + (double) (end_time - start_time) / 1000 + "秒");
+            System.out.println("总试探次数：" + serBee.repeat_count);
             System.out.println();
-            //serBee.GlobalMins[run] = serBee.GlobalMin;
-            //mean = mean + serBee.GlobalMin;
         }
 
         System.out.println();

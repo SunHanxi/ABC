@@ -12,39 +12,32 @@ public class ServiceBeeColony {
 
     /* ABC的控制参数*/
 
-    //约束条件,因为时间是5-20随机生成，取中位数12.5,共4个，所以为50
-    double time_want_spent = 45;
-
-    //全局重复检测器
-    int repeat_count = 0;
-
-    //雇佣蜂计数器
-    int employ_count = 0;
-
-    //跟随蜂计数器
-    int on_look_count = 0;
-
-    // 服务商的类别的数量
-    int n = 4;
-    // 随机数的上下界，此处为每个服务的数量，暂定为每个服务数量都为20
-    double lb = 0;
-    double ub = 19;
-    // 所有节点的数量
-    int total = n * (n + 3) / 2;
-
-    int NP = 20; /* 种群的规模*/
-
-    int FoodNumber = NP / 2; /*蜜源数量*/
-
+    //不依赖于初始化的变量
+    int maxCycle = 1000; /*实验的轮数*/
     int limit = 20;  /*通过“limit”试验无法改善的食物来源被其使用的蜜蜂所放弃*/
-
-    int maxCycle = 2500; /*实验的轮数*/
-
-    /* 问题特定变量*/
-
-
+    int repeat_count = 0;   //全局重复检测器
+    int employ_count = 0;   //雇佣蜂计数器
+    int on_look_count = 0;   //跟随蜂计数器
+    int NP = 20; /* 种群的规模*/
+    int FoodNumber = NP / 2; /*蜜源数量*/
+    double ObjValSol; //新解决方案的目标函数值
+    double FitnessSol; //新解决方案的适应度
+    /*param2change对应于j，
+    neighbour对应于等式v中的v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij})*/
+    int neighbour, param2change;
+    double GlobalMin; //ABC算法获得的最优解
+    double r; /*在[0,1)范围内的随机数*/
     //新建group_map，使用字典来保存每个蜜源对应位置的服务所属的类别
     HashMap<Integer, Integer> group_map = new HashMap<>();
+
+    //需要初始化的参数
+    double time_want_spent = 50; //约束条件,因为时间是5-20随机生成，取中位数12.5,共4个，所以为50
+    int n = 4;  // 服务商的类别的数量
+    double lb = 0;  // 随机数的上下界，此处为每个服务的数量，暂定为每个服务数量都为20
+    double ub = 19;
+
+    //依赖于初始化的参数
+    int total = n * (n + 3) / 2;// 所有节点的数量
 
     int D = total; /*要优化的问题的参数数量*/
 
@@ -54,27 +47,17 @@ public class ServiceBeeColony {
     //定义存放故障节点的矩阵
     int[][] fault_node = new int[n + 1][2];
 
-
-    /*
-     * 初始化所有服务商，假设有4类服务，每类服务有20个备选项。
-     * filepath = "./src/abc/service.txt"
-     */
     Service[][] services = new Service[n][(int) (ub - lb + 1)];
-
-    int runtime = 1;  /*算法在test里面重复运行的次数，重复多次可以查看算法的稳健性*/
-
 
     /*Foods是蜜源。 Foods矩阵的每一行都是一个包含要优化的D参数的向量。
     Foods矩阵的行数等于FoodNumber*/
-    //修改，直接让Foods存储service对象
+    //直接让Foods存储service对象
     Service[][] Foods = new Service[FoodNumber][D];
-    //double[][] Foods = new double[FoodNumber][D];
 
-    //f是保持与蜜源相关的目标函数值的向量
-    /*f is a vector holding objective function values associated with food sources */
+    //f是目标函数值
     double[] f = new double[FoodNumber];
 
-    //"fitness"是一种保持与食物来源相关的适应度的向量
+    //"fitness适应度
     double[] fitness = new double[FoodNumber];
 
     //trail是每个蜜源的试验次数
@@ -83,41 +66,10 @@ public class ServiceBeeColony {
     //prob是一个保持蜜源(解决方案)概率的载体,也即轮盘赌的概率
     double[] prob = new double[FoodNumber];
 
-    /*由v_{ij} = x_{ij} + \ phi_{ij} *（x_{kj} - x_{ij}）生成的新解（邻居）j是随机选择的参数，
-    k是随机选择的解决方案，与i不同*/
     Service[] solution = new Service[D];
+    Service[] GlobalParams = new Service[D]; //最优解的参数,直接存储service对象
 
-    //新解决方案的目标函数值
-    double ObjValSol;
 
-    //新解决方案的适应度
-    double FitnessSol;
-
-    /*param2change对应于j，
-    neighbour对应于等式v中的v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij})*/
-    int neighbour, param2change;
-
-    //ABC算法获得的最优解
-    double GlobalMin;
-
-    //最优解的参数 修改为直接存储service对象
-    Service[] GlobalParams = new Service[D];
-    //double[] GlobalParams = new double[D];
-
-    //GlobalMins在多次运行中保存每次运行的GlobalMin
-    double[] GlobalMins = new double[runtime];
-
-    /*在[0,1)范围内的随机数*/
-    double r;
-
-    /*函数指针返回double并将D维数组作为参数 */
-    /*If your function takes additional arguments then change function pointer definition and lines calling "...=function(solution);" in the code*/
-    /*如果你的函数需要额外的参数，那么改变函数指针定义和调用“... = function（solution）;”的行。 在代码中*/
-
-//	typedef double (*FunctionCallback)(double sol[D]);
-
-    /*编写自己的目标函数名称来取代sphere*/
-//	FunctionCallback function = &sphere;
 
     /*计算适应度*/
     double CalculateFitness(double fun) {
