@@ -13,7 +13,7 @@ public class ServiceBeeColony {
     /* ABC的控制参数*/
 
     //不依赖于初始化的变量
-    int maxCycle = 1000; /*实验的轮数*/
+    int maxCycle; /*实验的轮数*/
     int limit = 20;  /*通过“limit”试验无法改善的食物来源被其使用的蜜蜂所放弃*/
     int repeat_count = 0;   //全局重复检测器
     int employ_count = 0;   //雇佣蜂计数器
@@ -54,11 +54,12 @@ public class ServiceBeeColony {
     Service[] GlobalParams; //最优解的参数,直接存储service对象
 
     //构造函数中对变量进行初始化
-    public ServiceBeeColony(double time_want_spent, int n, double lb, double ub, String dataset_path) {
+    public ServiceBeeColony(double time_want_spent, int n, double lb, double ub, String dataset_path, int maxCycle) {
         this.time_want_spent = time_want_spent;
         this.n = n;
         this.lb = lb;
         this.ub = ub;
+        this.maxCycle = maxCycle;
         this.total = n * (n + 3) / 2;
         this.D = this.total;
         this.path_matrix = new int[n + 1][n + 1];
