@@ -168,15 +168,9 @@ public class ServiceBeeColony {
              * 约束条件是时间，要求每条路径的时间都得符合要求
              * 路径信息在path_matrix中
              * */
-            while (repeat_flag) {
+            while (repeat_flag || flag) {
                 init(i);
                 repeat_flag = repeat_node(i);
-            }
-            while (flag) {
-                init(i);
-                //默认符合要求
-                //再次计算，如果不符合要求就接着循环
-                //清除time_spent[n]
                 flag = calc_time_spent(i);
             }
         }
