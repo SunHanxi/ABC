@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fca78fec-447c-4cca-970d-c51fe95a566d" name="Default Changelist" comment="持续优化结构">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4_10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4_20.txt" beforeDir="false" afterPath="$PROJECT_DIR$/4_20_0_19_5_20.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abc/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/abc/test.java" afterDir="false" />
-    </list>
+    <list default="true" id="fca78fec-447c-4cca-970d-c51fe95a566d" name="Default Changelist" comment="持续优化结构" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/abc/test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
+            <state relative-caret-position="494">
+              <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,6 +38,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/4_20_0_19_5_20.txt">
           <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/10_20_0_19_5_20.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3011" />
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -340,7 +342,7 @@
       <workItem from="1558412506914" duration="9312000" />
       <workItem from="1558518895991" duration="8357000" />
       <workItem from="1558529047761" duration="4851000" />
-      <workItem from="1558591866588" duration="2166000" />
+      <workItem from="1558591866588" duration="2423000" />
     </task>
     <task id="LOCAL-00001" summary="持续优化结构">
       <created>1558522045633</created>
@@ -353,7 +355,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81294000" />
+    <option name="totallyTimeSpent" value="81551000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -366,9 +368,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49846154" visible="true" weight="0.108742006" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49846154" visible="true" weight="0.108742006" />
       <window_info id="Structure" order="1" sideWeight="0.50153846" side_tool="true" weight="0.10660981" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -377,7 +378,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32832617" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.24892704" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.24892704" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -483,17 +484,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/4_20_0_19_5_20.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/abc/test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
+        <state relative-caret-position="494">
+          <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/4_20_0_19_5_20.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/10_20_0_19_5_20.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3011" />
       </provider>
     </entry>
   </component>
