@@ -23,7 +23,7 @@ public class ServiceBeeColony {
     double ObjValSol; //新解决方案的目标函数值
     double FitnessSol; //新解决方案的适应度
     /*param2change对应于j，
-    neighbour对应于等式v中的v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij})*/
+    neighbour对应于等式v_{ij}=x_{ij}+\phi_{ij}*(x_{kj}-x_{ij}) 中的i*/
     int neighbour, param2change;
     double GlobalMin; //ABC算法获得的最优解
     double r; /*在[0,1)范围内的随机数*/
@@ -31,12 +31,29 @@ public class ServiceBeeColony {
     HashMap<Integer, Integer> group_map = new HashMap<>();
 
     //需要初始化的参数
-    double time_want_spent = 50; //约束条件,因为时间是5-20随机生成，取中位数12.5,共4个，所以为50
-    int n = 4;  // 服务商的类别的数量
-    double lb = 0;  // 随机数的上下界，此处为每个服务的数量，暂定为每个服务数量都为20
-    double ub = 19;
+    double time_want_spent; //约束条件,因为时间是5-20随机生成，取中位数12.5,共4个，所以为50
+    int n;  // 服务商的类别的数量
+    double lb;  // 随机数的上下界，此处为每个服务的数量，暂定为每个服务数量都为20
+    double ub;
     String dataset_path; //数据集路径
 
+    //依赖于初始化的参数
+    int total;// 所有节点的数量
+    int D; /*要优化的问题的参数数量*/
+    int[][] path_matrix; // 定义路径矩阵
+    int[][] fault_node; //定义存放故障节点的矩阵
+    Service[][] services; // 所有服务商
+    /*Foods是蜜源。 Foods矩阵的每一行都是一个包含要优化的D参数的向量。
+    Foods矩阵的行数等于FoodNumber*/
+    Service[][] Foods; //直接让Foods存储service对象
+    double[] f; //f是目标函数值
+    double[] fitness; //"fitness适应度
+    double[] trial;  //trail是每个蜜源的试验次数
+    double[] prob; //prob是一个保持蜜源(解决方案)概率的载体,也即轮盘赌的概率
+    Service[] solution;
+    Service[] GlobalParams; //最优解的参数,直接存储service对象
+
+    //构造函数中对变量进行初始化
     public ServiceBeeColony(double time_want_spent, int n, double lb, double ub, String dataset_path) {
         this.time_want_spent = time_want_spent;
         this.n = n;
@@ -57,27 +74,9 @@ public class ServiceBeeColony {
         this.dataset_path = dataset_path;
     }
 
-    //依赖于初始化的参数
-    int total;// 所有节点的数量
-    int D; /*要优化的问题的参数数量*/
-    int[][] path_matrix; // 定义路径矩阵
-    int[][] fault_node; //定义存放故障节点的矩阵
-    Service[][] services; // 所有服务商
-    /*Foods是蜜源。 Foods矩阵的每一行都是一个包含要优化的D参数的向量。
-    Foods矩阵的行数等于FoodNumber*/
-    Service[][] Foods; //直接让Foods存储service对象
-    double[] f; //f是目标函数值
-    double[] fitness; //"fitness适应度
-    double[] trial;  //trail是每个蜜源的试验次数
-    double[] prob; //prob是一个保持蜜源(解决方案)概率的载体,也即轮盘赌的概率
-    Service[] solution;
-    Service[] GlobalParams; //最优解的参数,直接存储service对象
-
-
     /*存储最佳蜜源*/
     void MemorizeBestSource() {
         int i, j;
-
         for (i = 0; i < FoodNumber; i++) {
             if (f[i] < GlobalMin) {
                 GlobalMin = f[i];
@@ -88,9 +87,7 @@ public class ServiceBeeColony {
     }
 
     /*变量在[lb，ub]范围内初始化。 如果每个参数具有不同的范围，则使用数组lb [j]，ub [j]而不是lb和ub*/
-    /*Variables are initialized in the range [lb,ub]. If each parameter has different range, use arrays lb[j], ub[j] instead of lb and ub */
     /* 蜜源的计数器也在此功能中初始化*/
-
 
     void init(int index) {
         /*
@@ -106,9 +103,9 @@ public class ServiceBeeColony {
          * */
         int pos;
         repeat_count++;
-        if (repeat_count % 10000 == 0) {
-            //System.out.println("初始化第"+repeat_count/10000+"万次");
-        }
+        /*if (repeat_count % 10000 == 0) {
+            System.out.println("初始化第"+repeat_count/10000+"万次");
+        }*/
         //开始初始化total个节点
         for (pos = 0; pos < total; pos++) {
 
