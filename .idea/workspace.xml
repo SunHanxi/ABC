@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fca78fec-447c-4cca-970d-c51fe95a566d" name="Default Changelist" comment="持续优化结构">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/10_20_0_19_5_20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15_20_0_19_5_20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4_10_0_9_5_20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4_20_0_19_5_20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5_20_0_19_5_20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeneratingDataSets.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneratingDataSets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/abc/ServiceBeeColony.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/abc/ServiceBeeColony.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/abc/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/abc/test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tt.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,10 +36,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/abc/test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="51" lean-forward="true" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
+            <state relative-caret-position="314">
+              <caret line="101" column="38" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#run_ABC#0;class#test#0" />
               </folding>
             </state>
           </provider>
@@ -42,11 +49,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/abc/ServiceBeeColony.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1007">
-              <caret line="56" column="114" selection-start-line="56" selection-start-column="114" selection-end-line="56" selection-end-column="114" />
+            <state relative-caret-position="415">
+              <caret line="57" column="27" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4876#5686#0" />
               </folding>
             </state>
           </provider>
@@ -64,8 +70,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="228">
+              <caret line="12" column="58" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -73,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/abc/Service.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+            <state relative-caret-position="437">
+              <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -82,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/abc/FindPath.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+            <state relative-caret-position="1658">
+              <caret line="150" column="13" selection-start-line="150" selection-start-column="13" selection-end-line="150" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -107,9 +116,11 @@
       <find>system</find>
       <find>Myfun</find>
       <find>试探</find>
-      <find>println</find>
       <find>初始化</find>
       <find>serBee</find>
+      <find>600</find>
+      <find>println</find>
+      <find>init</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -129,11 +140,11 @@
         <option value="$PROJECT_DIR$/src/abc/beeColony.java" />
         <option value="$PROJECT_DIR$/src/abc/cinfig.txt" />
         <option value="$PROJECT_DIR$/src/abc/4_10.txt" />
-        <option value="$PROJECT_DIR$/src/tt.java" />
         <option value="$PROJECT_DIR$/src/abc/FindPath.java" />
         <option value="$PROJECT_DIR$/src/abc/Service.java" />
         <option value="$PROJECT_DIR$/src/abc/readfile.java" />
         <option value="$PROJECT_DIR$/src/abc/ServiceBeeColony.java" />
+        <option value="$PROJECT_DIR$/src/tt.java" />
         <option value="$PROJECT_DIR$/src/abc/test.java" />
       </list>
     </option>
@@ -155,12 +166,19 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="ABC" type="b2602c69:ProjectViewProjectNode" />
               <item name="ABC" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ABC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ABC" type="462c0819:PsiDirectoryNode" />
+              <item name="file" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ABC" type="b2602c69:ProjectViewProjectNode" />
@@ -177,8 +195,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -298,10 +314,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.test" />
+        <item itemvalue="Application.tt" />
         <item itemvalue="Application.ServiceBeeColony" />
         <item itemvalue="Application.FindPath" />
         <item itemvalue="Application.readfile" />
-        <item itemvalue="Application.tt" />
       </list>
     </recent_temporary>
   </component>
@@ -326,6 +342,7 @@
       <workItem from="1558591866588" duration="2423000" />
       <workItem from="1558597827448" duration="1939000" />
       <workItem from="1558599864930" duration="123000" />
+      <workItem from="1558756656524" duration="10796000" />
     </task>
     <task id="LOCAL-00001" summary="持续优化结构">
       <created>1558522045633</created>
@@ -338,7 +355,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83613000" />
+    <option name="totallyTimeSpent" value="94409000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -351,8 +368,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49846154" visible="true" weight="0.1108742" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49846154" visible="true" weight="0.1119403" />
       <window_info id="Structure" order="1" sideWeight="0.50153846" side_tool="true" weight="0.10660981" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -361,7 +379,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32832617" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.24892704" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.37660944" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -413,31 +431,10 @@
     <entry file="file://$PROJECT_DIR$/10_20_0_19_5_20.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/abc/config.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/abc/Service.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/abc/FindPath.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        <state relative-caret-position="1658">
+          <caret line="150" column="13" selection-start-line="150" selection-start-column="13" selection-end-line="150" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -451,23 +448,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/abc/ServiceBeeColony.java">
+    <entry file="file://$PROJECT_DIR$/src/abc/Service.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1007">
-          <caret line="56" column="114" selection-start-line="56" selection-start-column="114" selection-end-line="56" selection-end-column="114" />
+        <state relative-caret-position="437">
+          <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/lang/NumberFormatException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="64" column="15" selection-start-line="64" selection-start-column="15" selection-end-line="64" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/abc/config.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="58" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4876#5686#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/abc/ServiceBeeColony.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="57" column="27" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/abc/test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="51" lean-forward="true" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
+        <state relative-caret-position="314">
+          <caret line="101" column="38" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run_ABC#0;class#test#0" />
           </folding>
         </state>
       </provider>

@@ -53,6 +53,10 @@ public class ServiceBeeColony {
     Service[] solution;
     Service[] GlobalParams; //最优解的参数,直接存储service对象
 
+    long start_this_time = System.currentTimeMillis();
+    int dont_run = 0;
+    int max_run_time = 600;
+
     //构造函数中对变量进行初始化
     public ServiceBeeColony(double time_want_spent, int n, double lb, double ub, String dataset_path, int maxCycle) {
         this.time_want_spent = time_want_spent;
@@ -144,11 +148,10 @@ public class ServiceBeeColony {
         fitness[index] = CalculateFitness(f[index]);
         //将所有蜜源的trail置零
         trial[index] = 0;
-
     }
 
     /*所有蜜源都已初始化 */
-    void initial() {
+    int initial() {
 
         //初始化路径矩阵和故障节点
         init_services_and_path();
@@ -168,6 +171,8 @@ public class ServiceBeeColony {
              * */
             while (repeat_flag || flag) {
                 init(i);
+                if((System.currentTimeMillis()-start_this_time)/1000 > max_run_time)
+                    return -1;
                 repeat_flag = repeat_node(i);
                 flag = calc_time_spent(i);
             }
@@ -178,6 +183,7 @@ public class ServiceBeeColony {
         GlobalMin = f[0];
         for (i = 0; i < D; i++)
             GlobalParams[i] = Foods[0][i];
+        return 0;
     }
 
     void SendEmployedBees() {
