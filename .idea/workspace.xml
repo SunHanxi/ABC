@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fca78fec-447c-4cca-970d-c51fe95a566d" name="Default Changelist" comment="持续优化结构">
-      <change beforePath="$PROJECT_DIR$/10_20_0_19_5_20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/15_20_0_19_5_20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4_10_0_9_5_20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4_20_0_19_5_20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5_20_0_19_5_20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GeneratingDataSets.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneratingDataSets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abc/ServiceBeeColony.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/abc/ServiceBeeColony.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/abc/BeeColony_without_fault.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/abc/test_without_fault.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/abc/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/abc/test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tt.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,11 +28,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/abc/test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="101" column="38" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
+            <state relative-caret-position="1653">
+              <caret line="118" column="42" lean-forward="true" selection-end-line="177" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#run_ABC#0;class#test#0" />
@@ -47,10 +42,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/abc/test_without_fault.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="257">
+              <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/abc/ServiceBeeColony.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="57" column="27" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
+            <state relative-caret-position="38">
+              <caret line="17" column="37" lean-forward="true" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/abc/BeeColony_without_fault.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="503">
+              <caret line="158" column="23" lean-forward="true" selection-start-line="158" selection-start-column="23" selection-end-line="158" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -146,6 +165,8 @@
         <option value="$PROJECT_DIR$/src/abc/ServiceBeeColony.java" />
         <option value="$PROJECT_DIR$/src/tt.java" />
         <option value="$PROJECT_DIR$/src/abc/test.java" />
+        <option value="$PROJECT_DIR$/src/abc/test_without_fault.java" />
+        <option value="$PROJECT_DIR$/src/abc/BeeColony_without_fault.java" />
       </list>
     </option>
   </component>
@@ -174,11 +195,6 @@
             <path>
               <item name="ABC" type="b2602c69:ProjectViewProjectNode" />
               <item name="ABC" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ABC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ABC" type="462c0819:PsiDirectoryNode" />
-              <item name="file" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ABC" type="b2602c69:ProjectViewProjectNode" />
@@ -342,7 +358,7 @@
       <workItem from="1558591866588" duration="2423000" />
       <workItem from="1558597827448" duration="1939000" />
       <workItem from="1558599864930" duration="123000" />
-      <workItem from="1558756656524" duration="10796000" />
+      <workItem from="1558756656524" duration="23350000" />
     </task>
     <task id="LOCAL-00001" summary="持续优化结构">
       <created>1558522045633</created>
@@ -355,7 +371,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94409000" />
+    <option name="totallyTimeSpent" value="106963000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -379,7 +395,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32832617" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.37660944" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.305794" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -479,23 +495,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/abc/ServiceBeeColony.java">
+    <entry file="file://$PROJECT_DIR$/src/abc/test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="57" column="27" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
+        <state relative-caret-position="1653">
+          <caret line="118" column="42" lean-forward="true" selection-end-line="177" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#run_ABC#0;class#test#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/abc/test_without_fault.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/abc/test.java">
+    <entry file="file://$PROJECT_DIR$/src/abc/ServiceBeeColony.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="101" column="38" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
+        <state relative-caret-position="38">
+          <caret line="17" column="37" lean-forward="true" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#run_ABC#0;class#test#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/abc/BeeColony_without_fault.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="503">
+          <caret line="158" column="23" lean-forward="true" selection-start-line="158" selection-start-column="23" selection-end-line="158" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

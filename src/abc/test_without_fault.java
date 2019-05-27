@@ -3,10 +3,7 @@ package abc;
 import java.io.*;
 import java.util.Arrays;
 
-public class test {
-
-    //使用自定义参数
-    //static ServiceBeeColony serBee = new ServiceBeeColony(time_want_spent,n,lb,ub);
+public class test_without_fault {
 
     public static void main(String[] args) {
 
@@ -20,7 +17,7 @@ public class test {
         }
 
         //新建文件流
-        File f = new File("result_时间紧迫度_0.45_0.8_0.05.txt");
+        File f = new File("result_without_fault_时间紧迫度_0.45_0.8_0.05.txt");
         try {
             FileOutputStream result_file = new FileOutputStream(f);
             OutputStreamWriter writer = new OutputStreamWriter(result_file, "UTF-8");
@@ -48,7 +45,7 @@ public class test {
 
     }
 
-    static double run_ABC(ServiceBeeColony serBee) {
+    static double run_ABC(BeeColony_without_fault serBee) {
         int aaaaaaaaa = 0;
         long start_time = System.currentTimeMillis();
         aaaaaaaaa = serBee.initial();
@@ -58,12 +55,9 @@ public class test {
         for (int iter = 0; iter < serBee.maxCycle; iter++) {
             serBee.SendEmployedBees();
             serBee.CalculateProbabilities();
-            serBee.re_init();
             serBee.SendOnlookerBees();
-            serBee.re_init();
             serBee.MemorizeBestSource();
             serBee.SendScoutBees();
-            serBee.re_init();
         }
         long end_time = System.currentTimeMillis();
         return (double) (end_time - start_time) / 1000;
@@ -110,7 +104,7 @@ public class test {
 
             int j = 0;
             for (int run = 0; run < runtime; run++) {
-                ServiceBeeColony serBee = new ServiceBeeColony(time_want_spent, n, lb, ub, folder + dataset_path, maxCycle);
+                BeeColony_without_fault serBee = new BeeColony_without_fault(time_want_spent, n, lb, ub, folder + dataset_path, maxCycle);
                 double current_run_time;
 
                 current_run_time = run_ABC(serBee);
@@ -132,27 +126,14 @@ public class test {
 
                 //按路径依次输出每条路径的解
                 //求解每条路径的cost和price
-                double[] time = new double[serBee.n + 1];
-                double totalTime = 0;
-                double[] price = new double[serBee.n + 1];
-                double totalPrice = 0;
-                for (int i = 0; i < serBee.path_matrix.length; i++) {
-                    //writer.append("第"+(i+1)+"条路径: \n");
-                    for (int k = 0; k < serBee.path_matrix[i].length; k++) {
-                        if (serBee.path_matrix[i][k] == -1)
-                            break;
-                        time[i] += serBee.GlobalParams[serBee.path_matrix[i][k]].time;
-                        price[i] += serBee.GlobalParams[serBee.path_matrix[i][k]].price;
-                    }
-                    totalPrice += price[i];
-                    totalTime += time[i];
+                double time = 0;
+                double price = 0;
+                for (int i = 0; i < serBee.GlobalParams.length; i++) {
+                    time+=serBee.GlobalParams[i].time;
+                    price+=serBee.GlobalParams[i].price;
                 }
-                writer.append("费用分别为：" + Arrays.toString(price) + "\n");
-                writer.append("时间分别为：" + Arrays.toString(time) + "\n");
-                String avgPrice = String.format("%.2f", totalPrice / (serBee.n + 1));
-                String avgTime = String.format("%.2f", totalTime / (serBee.n + 1));
-                writer.append("Cost：Min ：" + Arrays.stream(price).min().getAsDouble() + "    Avg:" + avgPrice + "    Max：" + Arrays.stream(price).max().getAsDouble() + "\n");
-                writer.append("Time：Min ：" + Arrays.stream(time).min().getAsDouble() + "    Avg:" + avgTime + "    Max：" + Arrays.stream(time).max().getAsDouble() + "\n");
+                writer.append("费用为：" + price + "\n");
+                writer.append("时间为：" + time + "\n");
 
                 writer.append("\n");
                 writer.append((run + 1) + " run: Lowest Cost: " + serBee.GlobalMin + "\n");
