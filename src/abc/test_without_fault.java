@@ -17,7 +17,7 @@ public class test_without_fault {
         }
 
         //新建文件流
-        File f = new File("result_without_fault_时间紧迫度_0.45_0.8_0.05.txt");
+        File f = new File("result_without_fault_时间紧迫度_0.2_0.8_0.1.txt");
         try {
             FileOutputStream result_file = new FileOutputStream(f);
             OutputStreamWriter writer = new OutputStreamWriter(result_file, "UTF-8");
@@ -27,7 +27,7 @@ public class test_without_fault {
                 dataset_path = fileNames[i];
                 // 初始化参数
                 double time_urgency;  //时间紧迫度
-                for (time_urgency = 0.45; time_urgency <= 0.8; time_urgency += 0.05) {
+                for (time_urgency = 0.2; time_urgency <= 0.85; time_urgency += 0.1) {
                     fun(writer, folder, dataset_path, time_urgency);
                 }
             }

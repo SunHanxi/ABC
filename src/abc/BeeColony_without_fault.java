@@ -49,7 +49,7 @@ public class BeeColony_without_fault {
     Service[] GlobalParams; //最优解的参数,直接存储service对象
 
     long start_this_time = System.currentTimeMillis();
-    int max_run_time = 600;
+    double max_run_time = 600;
 
     //构造函数中对变量进行初始化
     public BeeColony_without_fault(double time_want_spent, int n, double lb, double ub, String dataset_path, int maxCycle) {
