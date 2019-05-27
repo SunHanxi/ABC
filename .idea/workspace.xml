@@ -2,10 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fca78fec-447c-4cca-970d-c51fe95a566d" name="Default Changelist" comment="持续优化结构">
-      <change beforePath="$PROJECT_DIR$/src/abc/BeeColony_without_fault.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/abc/BeeColony_without_fault.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abc/ServiceBeeColony.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/abc/ServiceBeeColony.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeneratingDataSets.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneratingDataSets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/10_100_0_99_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/10_100_0_99_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/10_150_0_149_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/10_150_0_149_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/10_200_0_199_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/10_200_0_199_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/10_50_0_49_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/10_50_0_49_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/15_100_0_99_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/15_100_0_99_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/15_150_0_149_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/15_150_0_149_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/15_200_0_199_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/15_200_0_199_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/15_50_0_49_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/15_50_0_49_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/20_100_0_99_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/20_100_0_99_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/20_150_0_149_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/20_150_0_149_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/20_200_0_199_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/20_200_0_199_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/20_50_0_49_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/20_50_0_49_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/25_100_0_99_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/25_100_0_99_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/25_150_0_149_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/25_150_0_149_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/25_200_0_199_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/25_200_0_199_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/25_50_0_49_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/25_50_0_49_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/30_100_0_99_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/30_100_0_99_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/30_150_0_149_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/30_150_0_149_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/30_200_0_199_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/30_200_0_199_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/30_50_0_49_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/30_50_0_49_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/5_100_0_99_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/5_100_0_99_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/5_150_0_149_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/5_150_0_149_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/5_200_0_199_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/5_200_0_199_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/5_50_0_49_5_50.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/5_50_0_49_5_50.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_without_fault_时间紧迫度_0.2_0.8_0.1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/result_without_fault_时间紧迫度_0.2_0.8_0.1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/abc/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/abc/test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abc/test_without_fault.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/abc/test_without_fault.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tt.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/abc/test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3876">
-              <caret line="242" column="75" selection-start-line="242" selection-start-column="75" selection-end-line="242" selection-end-column="75" />
+            <state relative-caret-position="209">
+              <caret line="26" column="71" selection-start-line="26" selection-start-column="71" selection-end-line="26" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#run_ABC#0;class#test#0" />
@@ -42,7 +66,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/abc/ServiceBeeColony.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-133">
@@ -78,8 +102,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" column="58" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="58" />
+            <state relative-caret-position="114">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -154,11 +178,11 @@
         <option value="$PROJECT_DIR$/src/abc/FindPath.java" />
         <option value="$PROJECT_DIR$/src/abc/Service.java" />
         <option value="$PROJECT_DIR$/src/abc/readfile.java" />
-        <option value="$PROJECT_DIR$/src/tt.java" />
         <option value="$PROJECT_DIR$/src/abc/test_without_fault.java" />
-        <option value="$PROJECT_DIR$/src/abc/test.java" />
         <option value="$PROJECT_DIR$/src/abc/BeeColony_without_fault.java" />
         <option value="$PROJECT_DIR$/src/abc/ServiceBeeColony.java" />
+        <option value="$PROJECT_DIR$/src/tt.java" />
+        <option value="$PROJECT_DIR$/src/abc/test.java" />
       </list>
     </option>
   </component>
@@ -169,10 +193,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="351" />
-    <option name="y" value="87" />
-    <option name="width" value="1395" />
-    <option name="height" value="877" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="976" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -239,7 +263,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.test">
+  <component name="RunManager" selected="Application.tt">
     <configuration name="FindPath" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="abc.FindPath" />
       <module name="ABC" />
@@ -321,9 +345,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.tt" />
         <item itemvalue="Application.test" />
         <item itemvalue="Application.test_without_fault" />
-        <item itemvalue="Application.tt" />
         <item itemvalue="Application.ServiceBeeColony" />
         <item itemvalue="Application.FindPath" />
       </list>
@@ -350,7 +374,7 @@
       <workItem from="1558591866588" duration="2423000" />
       <workItem from="1558597827448" duration="1939000" />
       <workItem from="1558599864930" duration="123000" />
-      <workItem from="1558756656524" duration="30549000" />
+      <workItem from="1558756656524" duration="32564000" />
     </task>
     <task id="LOCAL-00001" summary="持续优化结构">
       <created>1558522045633</created>
@@ -363,7 +387,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114162000" />
+    <option name="totallyTimeSpent" value="116177000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -387,8 +411,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32832617" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.305794" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.44206008" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39914164" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32939914" />
@@ -439,16 +463,6 @@
     <entry file="file://$PROJECT_DIR$/10_20_0_19_5_20.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/abc/FindPath.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1658">
-          <caret line="150" column="13" selection-start-line="150" selection-start-column="13" selection-end-line="150" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/abc/Service.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -470,16 +484,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="58" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/abc/test_without_fault.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -497,14 +501,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/abc/test.java">
+    <entry file="file://$PROJECT_DIR$/src/abc/FindPath.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3876">
-          <caret line="242" column="75" selection-start-line="242" selection-start-column="75" selection-end-line="242" selection-end-column="75" />
+        <state relative-caret-position="1658">
+          <caret line="150" column="13" selection-start-line="150" selection-start-column="13" selection-end-line="150" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#run_ABC#0;class#test#0" />
-            <element signature="method#run_ABC#0;class#test#0" />
           </folding>
         </state>
       </provider>
@@ -519,12 +521,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/tt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/abc/ServiceBeeColony.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-133">
           <caret line="56" column="4" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/abc/test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="26" column="71" selection-start-line="26" selection-start-column="71" selection-end-line="26" selection-end-column="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#run_ABC#0;class#test#0" />
+            <element signature="method#run_ABC#0;class#test#0" />
           </folding>
         </state>
       </provider>

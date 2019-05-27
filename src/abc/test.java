@@ -10,7 +10,7 @@ public class test {
 
     public static void main(String[] args) {
 
-        //获取所有数据集
+        //获取所有数据集,弃用
         String folder_path = "./file";
         File file = new File(folder_path);
         File[] aaa = file.listFiles();
@@ -18,6 +18,18 @@ public class test {
         for (int i = 0; i < aaa.length; i++) {
             fileNames[i] = aaa[i].getName();
         }
+
+        //使用循环来制造文件名
+        for (int n = 5,count = 0; n <= 30 ; n+=5) {
+            for (int ub = 50; ub <= 300 ; ub+=50,count++) {
+                int uuub = ub-1;
+                int length = ub;
+                fileNames[count] = n+"_"+length+"_0_"+uuub+"_5_50.txt";
+            }
+        }
+
+
+
 
         //新建文件流
         File f = new File("混合运行结果.txt");
@@ -30,7 +42,7 @@ public class test {
                 dataset_path = fileNames[i];
                 // 初始化参数
                 double time_urgency;  //时间紧迫度
-                for (time_urgency = 0.045; time_urgency <= 0.08; time_urgency += 0.05) {
+                for (time_urgency = 0.45; time_urgency <= 0.88; time_urgency += 0.1) {
                     fun_without_fault(writer, folder, dataset_path, time_urgency);
                     fun_with_fault(writer, folder, dataset_path, time_urgency);
                     writer.append("\n");
